@@ -149,6 +149,12 @@ jobs:
       - name: Install the package
         run: make install
 
+      # Figure out version of python being used
+      - name: Python version
+        run: |
+          which python
+          python --version
+
       # Run Codecov Automated Test Selection
       - name: Run ATS
         uses: codecov/codecov-ats@v0
