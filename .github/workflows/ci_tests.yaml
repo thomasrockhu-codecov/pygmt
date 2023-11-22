@@ -157,17 +157,17 @@ jobs:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         with:
           verbose: true
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && ${{ runner.os }} != "windows"
 
       # Run Selected tests
       - name: Run selected tests
         run: make test PYTEST_EXTRA="-r P ${{ env.CODECOV_ATS_TESTS}}"
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && ${{ runner.os }} != "windows"
 
       # Run the regular tests
       - name: Run tests
         run: make test PYTEST_EXTRA="-r P --cov-context"
-        if: github.event_name != 'pull_request'
+        if: github.event_name != 'pull_request' || ${{ runner.os }} == "windows"
 
       # Upload diff images on test failure
       - name: Upload diff images if any test fails
