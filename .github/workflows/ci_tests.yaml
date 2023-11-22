@@ -166,7 +166,7 @@ jobs:
 
       # Run the regular tests
       - name: Run tests
-        run: make test PYTEST_EXTRA="-r P --cov-context"
+        run: make test PYTEST_EXTRA="-r P --cov-context=test"
         if: github.event_name != 'pull_request' || ${{ runner.os }} == "windows"
 
       # Upload diff images on test failure
